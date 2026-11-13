@@ -219,7 +219,7 @@ function direccionDespacho(d) {
 
 function linkMapa(d) {
   const lugar = [[d.direccion, d.numero].filter(Boolean).join(" "), d.comuna, "Chile"].filter(Boolean).join(", ");
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(lugar)}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(lugar)}`;
 }
 
 function etiquetaEstadoDespacho(d) {
