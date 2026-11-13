@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <!-- Boceto: que Google no lo indexe. Quitar al publicar la versión final -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Isidora | Venta de Materiales de Remodelación</title>
+  <meta name="description" content="Planchas PVC tipo mármol, piso vinílico y piso flotante en San Pedro de la Paz. Despacho gratis en la comuna.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css?v=24">
+</head>
+<body>
+  <header class="header">
+    <div class="contenedor header__fila">
+      <a href="#inicio" class="logo">
+        <span class="logo__icono">I</span>
+        <span class="logo__texto"><strong>ISIDORA</strong><small>Venta de Materiales</small></span>
+      </a>
+      <button class="menu-boton" aria-label="Abrir menú" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="nav">
+        <a href="#catalogo">Catálogo</a>
+        <a href="#calculadora">Calculadora</a>
+        <a href="#contacto">Contacto</a>
+        <a href="#" class="boton boton--chico" data-whatsapp>Cotizar</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="contenedor hero__fila">
+        <div class="hero__texto">
+          <span class="etiqueta">San Pedro de la Paz</span>
+          <h1>Transforma tus espacios <span class="resaltado">sin obras</span></h1>
+          <p>Planchas PVC tipo mármol, piso vinílico y piso flotante. Materiales impermeables, fáciles de instalar y a buen precio.</p>
+          <!-- Acceso directo a cada categoría del catálogo (se arma con las categorías del panel) -->
+          <div class="hero__categorias">
+            <span class="hero__categorias-titulo">¿Qué estás buscando?</span>
+            <div class="hero-categorias" data-hero-categorias></div>
+            <a href="#catalogo" class="hero__ver-todo">Ver todo el catálogo →</a>
+          </div>
+          <div class="hero__botones">
+            <a href="#" class="boton" data-whatsapp>Cotizar por WhatsApp</a>
+          </div>
+          <ul class="beneficios">
+            <li>100% impermeable</li>
+            <li>Fácil instalación</li>
+            <li>Despacho gratis en la comuna</li>
+          </ul>
+        </div>
+        <div class="hero__oferta">
+          <div class="tarjeta-oferta">
+            <div class="tarjeta-oferta__imagen textura marmol-calacatta">
+              <img class="tarjeta-oferta__foto" src="img/productos/calacatta-bronce-ambiente.webp" alt="Living con muro de PVC tipo mármol Calacatta Bronce">
+              <div class="sello" aria-label="9% de descuento">
+                <div class="sello__estrella" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="sello__texto"><strong>-9%</strong><small>Oferta</small></div>
+              </div>
+            </div>
+            <div class="tarjeta-oferta__info">
+              <span class="etiqueta etiqueta--oscura etiqueta--brillo">Oferta</span>
+              <h2>PVC tipo mármol 3 mm</h2>
+              <p class="precio-anterior">Antes <s>$22.000</s></p>
+              <p class="precio-grande">$19.990 <small>por plancha</small></p>
+              <p class="regalo">+ adhesivo de regalo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Franja animada: el grupo va duplicado para que el movimiento no tenga cortes -->
+    <div class="marquesina" aria-label="Oferta PVC mármol a $19.990, piso vinílico, piso flotante y despacho gratis">
+      <div class="marquesina__pista" aria-hidden="true">
+        <div class="marquesina__grupo">
+          <span class="lleno">Oferta</span>
+          <span class="contorno">PVC Mármol</span>
+          <span class="estrella">✦</span>
+          <span class="lleno">$19.990</span>
+          <span class="contorno">Piso Vinílico</span>
+          <span class="estrella">✦</span>
+          <span class="lleno">Despacho gratis</span>
+          <span class="contorno">Piso Flotante</span>
+          <span class="estrella">✦</span>
+        </div>
+        <div class="marquesina__grupo">
+          <span class="lleno">Oferta</span>
+          <span class="contorno">PVC Mármol</span>
+          <span class="estrella">✦</span>
+          <span class="lleno">$19.990</span>
+          <span class="contorno">Piso Vinílico</span>
+          <span class="estrella">✦</span>
+          <span class="lleno">Despacho gratis</span>
+          <span class="contorno">Piso Flotante</span>
+          <span class="estrella">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <section id="catalogo" class="seccion">
+      <div class="contenedor">
+        <div class="seccion__titulo">
+          <h2>Catálogo</h2>
+          <p>Elige un producto y cotízalo directo por WhatsApp.</p>
+        </div>
+        <div class="filtros" role="tablist" aria-label="Categorías"></div>
+        <div class="grilla-productos"></div>
+      </div>
+    </section>
+
+    <section id="calculadora" class="seccion seccion--oscura">
+      <div class="contenedor calculadora">
+        <div class="calculadora__texto">
+          <h2>¿Cuánto piso necesitas?</h2>
+          <p>Elige tu piso flotante o vinílico, ingresa las medidas de la pieza (o los m²) y te decimos al tiro cuántas cajas comprar según lo que rinde cada caja. Sumamos un 10% extra por cortes.</p>
+        </div>
+        <form class="calculadora__form" novalidate>
+          <label>Piso
+            <select name="producto"></select>
+          </label>
+          <p class="calculadora__rinde" data-rinde></p>
+          <div class="calculadora__medidas">
+            <label>Largo (m)
+              <input type="number" name="largo" min="0" step="0.01" inputmode="decimal" placeholder="Ej: 3,5">
+            </label>
+            <label>Ancho (m)
+              <input type="number" name="ancho" min="0" step="0.01" inputmode="decimal" placeholder="Ej: 2,4">
+            </label>
+          </div>
+          <label>o, si ya sabes los m² totales
+            <input type="number" name="metros" min="0" step="0.01" inputmode="decimal" placeholder="Ej: 18">
+          </label>
+          <div class="calculadora__resultado" aria-live="polite">
+            Ingresa las medidas para calcular.
+          </div>
+          <a href="#" class="boton boton--bloque" data-whatsapp-calculo hidden>Cotizar esta cantidad</a>
+          <button type="button" class="boton boton--borde boton--bloque" data-agregar-calculo hidden>Agregar a mi lista</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Trabajos, opiniones y preguntas: se cargan desde el panel y se muestran solo si tienen contenido -->
+    <section id="trabajos" class="seccion" data-seccion="trabajos" hidden>
+      <div class="contenedor">
+        <div class="seccion__titulo">
+          <h2>Trabajos realizados</h2>
+          <p>Algunas instalaciones hechas con nuestros materiales.</p>
+        </div>
+        <div class="galeria" data-galeria></div>
+      </div>
+    </section>
+
+    <!-- Opiniones y preguntas frecuentes juntas; las preguntas van cerradas en una casilla que se abre al tocarla -->
+    <section id="opiniones" class="seccion seccion--gris" data-seccion="clientes" hidden>
+      <div class="contenedor clientes">
+        <div data-parte="opiniones" hidden>
+          <div class="seccion__titulo">
+            <h2>Lo que dicen nuestros clientes</h2>
+          </div>
+          <div class="opiniones" data-opiniones></div>
+        </div>
+
+        <details id="preguntas" class="dudas" data-parte="preguntas" hidden>
+          <summary class="dudas__boton">
+            <span class="dudas__icono" aria-hidden="true">?</span>
+            <span class="dudas__texto">
+              <strong>Preguntas frecuentes</strong>
+              <small class="dudas__abrir">Toca para ver <span data-cantidad-preguntas></span></small>
+              <small class="dudas__cerrar">Toca para cerrar</small>
+            </span>
+            <span class="dudas__flecha" aria-hidden="true"></span>
+          </summary>
+          <div class="preguntas" data-preguntas></div>
+        </details>
+      </div>
+    </section>
+
+    <section id="contacto" class="seccion">
+      <div class="contenedor contacto">
+        <div class="contacto__datos">
+          <h2>Visítanos</h2>
+          <p class="contacto__direccion"></p>
+          <div class="contacto__horario"></div>
+          <ul class="contacto__medios">
+            <li><span>Teléfono</span><a data-telefono></a></li>
+            <li><span>Correo</span><a data-correo></a></li>
+          </ul>
+          <p class="contacto__despacho"></p>
+          <div class="contacto__botones">
+            <a href="#" class="boton" data-whatsapp>Escríbenos por WhatsApp</a>
+            <a href="#" class="boton boton--borde" data-boton-correo>Escríbenos por correo</a>
+            <a href="#" class="boton boton--borde" data-como-llegar target="_blank" rel="noopener">Cómo llegar</a>
+            <a href="#" class="boton boton--borde" data-instagram target="_blank" rel="noopener">Instagram</a>
+            <a href="#" class="boton boton--borde" data-facebook target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+        <div class="contacto__mapa">
+          <iframe title="Ubicación de Isidora en Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          <a class="mapa-respaldo" href="#" data-como-llegar target="_blank" rel="noopener" hidden>
+            <span class="mapa-respaldo__pin" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+            </span>
+            <strong>Tucapel 75, San Pedro de la Paz</strong>
+            <span>A pasos de la estación Costa Mar</span>
+            <span class="boton boton--chico">Abrir en Google Maps</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="contenedor">
+      <p>© <span data-anio></span> Isidora · Venta de Materiales de Remodelación · San Pedro de la Paz</p>
+      <a href="admin/" class="footer__admin">Acceso administración</a>
+    </div>
+  </footer>
+
+  <a href="#" class="whatsapp-flotante" data-whatsapp aria-label="Escribir por WhatsApp">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+  </a>
+
+  <dialog class="ficha">
+    <button class="ficha__cerrar" aria-label="Cerrar">×</button>
+    <div class="ficha__contenido"></div>
+  </dialog>
+
+  <!-- Foto de un trabajo en grande -->
+  <dialog class="visor" data-visor aria-label="Foto del trabajo">
+    <button type="button" class="ficha__cerrar" data-cerrar-visor aria-label="Cerrar">×</button>
+    <img data-visor-foto alt="">
+    <p data-visor-texto></p>
+  </dialog>
+
+  <!-- Lista de cotización: el cliente junta varios productos y los manda en un solo mensaje -->
+  <button type="button" class="lista-flotante" data-abrir-lista hidden>
+    Mi cotización <span class="lista-flotante__cantidad" data-lista-cantidad>0</span>
+  </button>
+
+  <dialog class="lista" data-lista aria-labelledby="titulo-lista">
+    <button type="button" class="ficha__cerrar" data-cerrar-lista aria-label="Cerrar">×</button>
+    <div class="lista__contenido">
+      <h3 id="titulo-lista">Mi cotización</h3>
+      <p class="lista__vacia" data-lista-vacia hidden>Tu lista está vacía. Abre un producto y toca "Agregar a mi lista".</p>
+      <div class="lista__items" data-lista-items></div>
+      <p class="lista__total" data-lista-total></p>
+      <form class="lista__form" data-lista-form novalidate>
+        <label>Tu nombre
+          <input name="nombre" autocomplete="name" maxlength="100">
+        </label>
+        <div class="lista__fila">
+          <label>Teléfono <small>(opcional)</small>
+            <input name="telefono" inputmode="tel" autocomplete="tel" maxlength="30">
+          </label>
+          <label>Comuna <small>(opcional)</small>
+            <input name="comuna" autocomplete="address-level2" maxlength="60">
+          </label>
+        </div>
+        <!-- Campo trampa: las personas no lo ven; si llega lleno, lo llenó un robot y no se guarda -->
+        <input class="lista__trampa" name="sitio" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <p class="lista__error" data-lista-error hidden></p>
+        <a href="#" class="boton boton--bloque" data-enviar-lista="whatsapp" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+        <a href="#" class="boton boton--borde boton--bloque" data-enviar-lista="correo">Enviar por correo</a>
+        <p class="lista__ok" data-lista-ok hidden></p>
+        <button type="button" class="lista__vaciar" data-vaciar-lista>Vaciar lista</button>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="js/config.js?v=24"></script>
+  <script src="js/productos.js?v=24"></script>
+  <script src="js/app.js?v=24"></script>
+</body>
+</html>

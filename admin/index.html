@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <!-- El panel nunca debe aparecer en Google -->
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel | Isidora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/estilos.css?v=27">
+  <link rel="stylesheet" href="../css/admin.css?v=27">
+</head>
+<body class="admin">
+  <!-- Íconos del panel: se usan con <svg class="icono"><use href="#i-nombre"></use></svg> -->
+  <svg xmlns="http://www.w3.org/2000/svg" hidden>
+    <symbol id="i-inicio" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M10 21v-6h4v6"/></symbol>
+    <symbol id="i-productos" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5Z"/><path d="m3 8 9 5 9-5"/><path d="M12 13v8"/></symbol>
+    <symbol id="i-ventas" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 10v4M18 10v4"/></symbol>
+    <symbol id="i-cotizaciones" viewBox="0 0 24 24"><path d="M20.5 12a8.5 8.5 0 0 1-12.3 7.6L3.5 20.5l1-4.4A8.5 8.5 0 1 1 20.5 12Z"/><path d="M8.5 10.5h7M8.5 14h4.5"/></symbol>
+    <symbol id="i-pagina" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M7.5 13h9M7.5 16.5h5"/></symbol>
+    <symbol id="i-externo" viewBox="0 0 24 24"><path d="M14 4h6v6"/><path d="M10 14 20 4"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="i-salir" viewBox="0 0 24 24"><path d="M15 4h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-3"/><path d="m10 17-5-5 5-5"/><path d="M5 12h11"/></symbol>
+    <symbol id="i-mas" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-descargar" viewBox="0 0 24 24"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M5 20h14"/></symbol>
+    <symbol id="i-buscar" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-categorias" viewBox="0 0 24 24"><path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9Z"/><circle cx="7.5" cy="7.5" r="1.5"/></symbol>
+    <symbol id="i-flecha" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="i-alerta" viewBox="0 0 24 24"><path d="M12 3 2 20h20Z"/><path d="M12 10v4M12 17h.01"/></symbol>
+    <symbol id="i-efectivo" viewBox="0 0 24 24"><rect x="2.5" y="7.5" width="16" height="11" rx="1.5"/><path d="M6 4.5h14a1.5 1.5 0 0 1 1.5 1.5v9"/><circle cx="10.5" cy="13" r="2.2"/></symbol>
+    <symbol id="i-tarjeta" viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M2.5 10h19M6 15h4"/></symbol>
+    <symbol id="i-transferencia" viewBox="0 0 24 24"><path d="M4 8h15"/><path d="m15 4 4 4-4 4"/><path d="M20 16H5"/><path d="m9 12-4 4 4 4"/></symbol>
+    <symbol id="i-despacho" viewBox="0 0 24 24"><path d="M2.5 6.5h11v10h-11Z"/><path d="M13.5 9.5h4l3 3.5v3.5h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="16.5" cy="17.5" r="1.8"/></symbol>
+    <symbol id="i-mapa" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-otro" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></symbol>
+  </svg>
+
+  <p class="admin__cargando" data-cargando>Cargando…</p>
+
+  <!-- Login -->
+  <main class="acceso" data-vista="login" hidden>
+    <div class="acceso__tarjeta">
+      <span class="acceso__logo"><span class="logo__icono">I</span> Isidora</span>
+      <h1>Entrar al panel</h1>
+      <p>Usa el correo y la clave que te entregamos.</p>
+      <form class="admin__form" data-form-login>
+        <label>Correo
+          <input type="email" name="correo" autocomplete="username" required>
+        </label>
+        <label>Clave
+          <input type="password" name="clave" autocomplete="current-password" required>
+        </label>
+        <p class="admin__error" data-error-login hidden></p>
+        <button class="boton boton--bloque" type="submit">Entrar</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Cuenta sin permiso -->
+  <main class="acceso" data-vista="sin-acceso" hidden>
+    <div class="acceso__tarjeta">
+      <span class="acceso__logo"><span class="logo__icono">I</span> Isidora</span>
+      <h1>Sin acceso</h1>
+      <p>Tu cuenta existe, pero no tiene permiso para usar el panel. Pídele al dueño que te dé acceso.</p>
+      <button type="button" class="boton boton--borde boton--bloque" data-salir>Cerrar sesión</button>
+    </div>
+  </main>
+
+  <!-- Panel -->
+  <div class="app" data-vista="panel" hidden>
+    <!-- Barra de arriba: solo en el celular -->
+    <header class="app__barra">
+      <span class="app__marca"><span class="logo__icono">I</span> Isidora</span>
+      <a class="app__boton-icono" href="../" target="_blank" rel="noopener" aria-label="Ver la página">
+        <svg class="icono"><use href="#i-externo"></use></svg>
+      </a>
+      <button type="button" class="app__boton-icono" data-salir aria-label="Cerrar sesión">
+        <svg class="icono"><use href="#i-salir"></use></svg>
+      </button>
+    </header>
+
+    <!-- Menú: a la izquierda en el computador, abajo en el celular -->
+    <aside class="app__menu">
+      <a href="../" class="app__marca app__marca--menu" target="_blank" rel="noopener">
+        <span class="logo__icono">I</span>
+        <span><strong>ISIDORA</strong><small>Panel de administración</small></span>
+      </a>
+      <nav class="app__nav" role="tablist" aria-label="Secciones del panel">
+        <button type="button" role="tab" data-pestana="resumen" aria-selected="true">
+          <svg class="icono"><use href="#i-inicio"></use></svg><span>Inicio</span>
+        </button>
+        <button type="button" role="tab" data-pestana="productos" aria-selected="false">
+          <svg class="icono"><use href="#i-productos"></use></svg><span>Productos</span>
+          <span class="admin__contador" data-contador-stock hidden></span>
+        </button>
+        <button type="button" role="tab" data-pestana="ventas" aria-selected="false">
+          <svg class="icono"><use href="#i-ventas"></use></svg><span>Ventas</span>
+        </button>
+        <button type="button" role="tab" data-pestana="cotizaciones" aria-selected="false">
+          <svg class="icono"><use href="#i-cotizaciones"></use></svg><span>Cotizaciones</span>
+          <span class="admin__contador" data-contador-cotizaciones hidden></span>
+        </button>
+        <button type="button" role="tab" data-pestana="pagina" aria-selected="false">
+          <svg class="icono"><use href="#i-pagina"></use></svg><span>Página</span>
+        </button>
+      </nav>
+      <div class="app__cuenta">
+        <div class="app__usuario">
+          <span class="app__avatar" data-inicial>R</span>
+          <span><strong data-nombre></strong><small data-rol></small></span>
+        </div>
+        <a class="app__enlace" href="../" target="_blank" rel="noopener">
+          <svg class="icono"><use href="#i-externo"></use></svg>Ver la página
+        </a>
+        <button type="button" class="app__enlace" data-salir>
+          <svg class="icono"><use href="#i-salir"></use></svg>Cerrar sesión
+        </button>
+      </div>
+    </aside>
+
+    <main class="app__contenido">
+      <!-- Inicio -->
+      <section class="vista" data-panel="resumen">
+        <header class="vista__cabeza">
+          <div>
+            <h1 class="vista__titulo" data-saludo>Hola</h1>
+            <p class="vista__bajada">Así va el negocio en <span data-nombre-mes></span>.</p>
+          </div>
+          <div class="vista__acciones">
+            <label class="campo-mes"><span>Mes</span><input type="month" data-mes></label>
+            <button type="button" class="boton boton--chico boton--borde" data-accion="nuevo-producto">
+              <svg class="icono"><use href="#i-mas"></use></svg>Producto
+            </button>
+            <button type="button" class="boton boton--chico" data-accion="nueva-venta">
+              <svg class="icono"><use href="#i-mas"></use></svg>Registrar venta
+            </button>
+          </div>
+        </header>
+        <!-- Caja del día: siempre muestra hoy, aunque arriba se elija otro mes -->
+        <section class="hoy" aria-labelledby="titulo-hoy">
+          <header class="hoy__cabeza">
+            <div>
+              <h2 id="titulo-hoy">Ventas de hoy</h2>
+              <p data-hoy-fecha></p>
+            </div>
+            <button type="button" class="enlace-flecha" data-ver-ventas-hoy>Ver en Ventas <svg class="icono"><use href="#i-flecha"></use></svg></button>
+          </header>
+          <div data-hoy></div>
+        </section>
+        <!-- Despachos que todavía no se entregan, de cualquier fecha -->
+        <section class="admin__caja despachos-inicio" aria-labelledby="titulo-despachos">
+          <div class="admin__caja-cabeza">
+            <h2 class="admin__subtitulo" id="titulo-despachos">
+              <svg class="icono" aria-hidden="true"><use href="#i-despacho"></use></svg>Despachos pendientes
+              <span class="admin__contador" data-contador-despachos hidden></span>
+            </h2>
+          </div>
+          <div data-despachos-pendientes></div>
+        </section>
+        <h2 class="inicio__seccion">Resumen del mes</h2>
+        <div class="admin__resumen" data-tarjetas-resumen></div>
+        <section class="admin__caja">
+          <h2 class="admin__subtitulo">Ventas por día</h2>
+          <div data-grafico-dias></div>
+        </section>
+        <div class="inicio__columnas">
+          <section class="admin__caja">
+            <div class="admin__caja-cabeza">
+              <h2 class="admin__subtitulo">Cotizaciones pendientes</h2>
+              <button type="button" class="enlace-flecha" data-ir-pestana="cotizaciones">Ver todas <svg class="icono"><use href="#i-flecha"></use></svg></button>
+            </div>
+            <div data-pendientes-inicio></div>
+          </section>
+          <section class="admin__caja">
+            <div class="admin__caja-cabeza">
+              <h2 class="admin__subtitulo">Stock bajo</h2>
+              <button type="button" class="enlace-flecha" data-ir-pestana="productos">Productos <svg class="icono"><use href="#i-flecha"></use></svg></button>
+            </div>
+            <div data-stock-bajo></div>
+          </section>
+        </div>
+        <section class="admin__caja">
+          <h2 class="admin__subtitulo">Productos más vendidos</h2>
+          <div data-top-productos></div>
+        </section>
+      </section>
+
+      <!-- Productos -->
+      <section class="vista" data-panel="productos" hidden>
+        <header class="vista__cabeza">
+          <div>
+            <h1 class="vista__titulo">Productos</h1>
+            <p class="vista__bajada" data-bajada-productos></p>
+          </div>
+          <div class="vista__acciones">
+            <button type="button" class="boton boton--chico boton--borde" data-abrir-categorias>
+              <svg class="icono"><use href="#i-categorias"></use></svg>Categorías
+            </button>
+            <button type="button" class="boton boton--chico" data-nuevo-producto>
+              <svg class="icono"><use href="#i-mas"></use></svg>Nuevo producto
+            </button>
+          </div>
+        </header>
+        <div class="subvistas" role="tablist" aria-label="Productos">
+          <button type="button" role="tab" data-subvista-boton="catalogo" aria-selected="true">Catálogo</button>
+          <button type="button" role="tab" data-subvista-boton="stock" aria-selected="false">Registro de stock</button>
+        </div>
+
+        <div data-subvista="catalogo">
+          <div class="admin__alertas" data-alertas-stock></div>
+          <label class="buscador">
+            <svg class="icono"><use href="#i-buscar"></use></svg>
+            <input type="search" placeholder="Buscar producto" aria-label="Buscar producto" data-buscar>
+          </label>
+          <div class="chips" data-filtro-categorias aria-label="Filtrar por categoría"></div>
+          <div class="tabla">
+            <div class="tabla__cabeza tabla__cabeza--productos" aria-hidden="true">
+              <span>Producto</span><span>Precio</span><span>Stock</span>
+            </div>
+            <div class="admin__lista" data-lista-productos></div>
+          </div>
+        </div>
+
+        <!-- Registro de stock: con cuánto abrió y cerró cada producto un día, y todo lo que entró y salió -->
+        <div data-subvista="stock" hidden>
+          <div class="registro__barra">
+            <div class="dia-selector">
+              <button type="button" data-mover-dia-stock="-1" aria-label="Día anterior"><svg class="icono"><use href="#i-flecha"></use></svg></button>
+              <input type="date" data-dia-stock aria-label="Día">
+              <button type="button" data-mover-dia-stock="1" aria-label="Día siguiente"><svg class="icono"><use href="#i-flecha"></use></svg></button>
+            </div>
+            <strong class="registro__dia" data-nombre-dia-stock></strong>
+            <button type="button" class="boton boton--chico boton--borde" data-excel-stock>
+              <svg class="icono"><use href="#i-descargar"></use></svg>Excel
+            </button>
+          </div>
+          <div class="cifras-stock" data-cifras-stock></div>
+          <section class="admin__caja">
+            <h2 class="admin__subtitulo">Stock del día</h2>
+            <div data-tabla-stock></div>
+          </section>
+          <section class="admin__caja">
+            <h2 class="admin__subtitulo">Movimientos</h2>
+            <div data-movimientos-stock></div>
+          </section>
+        </div>
+      </section>
+
+      <!-- Ventas -->
+      <section class="vista" data-panel="ventas" hidden>
+        <header class="vista__cabeza">
+          <div>
+            <h1 class="vista__titulo">Ventas</h1>
+            <p class="vista__bajada" data-total-ventas></p>
+          </div>
+          <div class="vista__acciones">
+            <div class="periodo">
+              <div class="periodo__tipo" role="group" aria-label="Ver ventas por">
+                <button type="button" data-tipo-periodo="mes" aria-pressed="true">Mes</button>
+                <button type="button" data-tipo-periodo="dia" aria-pressed="false">Día</button>
+              </div>
+              <input type="month" data-mes aria-label="Mes">
+              <input type="date" data-dia aria-label="Día" hidden>
+            </div>
+            <button type="button" class="boton boton--chico boton--borde" data-excel>
+              <svg class="icono"><use href="#i-descargar"></use></svg>Excel
+            </button>
+            <button type="button" class="boton boton--chico" data-nueva-venta>
+              <svg class="icono"><use href="#i-mas"></use></svg>Registrar venta
+            </button>
+          </div>
+        </header>
+        <div class="resumen-pagos" data-resumen-ventas hidden></div>
+        <div data-lista-ventas></div>
+      </section>
+
+      <!-- Cotizaciones -->
+      <section class="vista" data-panel="cotizaciones" hidden>
+        <header class="vista__cabeza">
+          <div>
+            <h1 class="vista__titulo">Cotizaciones</h1>
+            <p class="vista__bajada">Todo lo que cotizan desde la página. La referencia (por ejemplo C-7SWJ8) es la misma del WhatsApp o el correo del cliente.</p>
+          </div>
+          <div class="vista__acciones">
+            <label class="campo-mes"><span>Mostrar</span>
+              <select data-filtro-cotizaciones>
+                <option value="pendiente">Pendientes</option>
+                <option value="enviada">Respondidas</option>
+                <option value="aceptada">Compraron</option>
+                <option value="rechazada">No compraron</option>
+                <option value="todas">Todas</option>
+              </select>
+            </label>
+          </div>
+        </header>
+        <div class="admin__ventas" data-lista-cotizaciones></div>
+      </section>
+
+      <!-- Página: contenido que se muestra en la página. Las secciones vacías no aparecen -->
+      <section class="vista" data-panel="pagina" hidden>
+        <header class="vista__cabeza">
+          <div>
+            <h1 class="vista__titulo">Contenido de la página</h1>
+            <p class="vista__bajada">Lo que agregues aquí aparece en la página. Si una sección no tiene nada publicado, no se muestra.</p>
+          </div>
+        </header>
+        <section class="admin__caja" data-contenido="trabajos">
+          <div class="admin__caja-cabeza">
+            <h2 class="admin__subtitulo">Trabajos realizados</h2>
+            <button type="button" class="boton boton--chico" data-nuevo-contenido><svg class="icono"><use href="#i-mas"></use></svg>Agregar</button>
+          </div>
+          <p class="admin__nota">Fotos de instalaciones hechas por ustedes (no fotos del proveedor). Ideal: antes y después.</p>
+          <div class="admin__lista" data-lista-contenido></div>
+        </section>
+        <section class="admin__caja" data-contenido="preguntas">
+          <div class="admin__caja-cabeza">
+            <h2 class="admin__subtitulo">Preguntas frecuentes</h2>
+            <button type="button" class="boton boton--chico" data-nuevo-contenido><svg class="icono"><use href="#i-mas"></use></svg>Agregar</button>
+          </div>
+          <p class="admin__nota">Dejamos algunas como borrador (ocultas): revísalas, completa lo que está entre [corchetes] y márcalas para mostrarlas.</p>
+          <div class="admin__lista" data-lista-contenido></div>
+        </section>
+        <section class="admin__caja" data-contenido="opiniones">
+          <div class="admin__caja-cabeza">
+            <h2 class="admin__subtitulo">Opiniones de clientes</h2>
+            <button type="button" class="boton boton--chico" data-nuevo-contenido><svg class="icono"><use href="#i-mas"></use></svg>Agregar</button>
+          </div>
+          <p class="admin__nota">Solo opiniones reales y con permiso del cliente (por ejemplo, las que les escriben por WhatsApp o en Google).</p>
+          <div class="admin__lista" data-lista-contenido></div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <!-- Editor de producto -->
+  <dialog class="admin-dialogo" data-dialogo-producto aria-labelledby="titulo-producto">
+    <form class="admin__form" data-form-producto novalidate>
+      <header class="admin-dialogo__cabeza">
+        <h2 id="titulo-producto" data-titulo-producto>Editar producto</h2>
+        <button type="button" class="admin-dialogo__cerrar" data-cerrar aria-label="Cerrar">×</button>
+      </header>
+      <div class="admin-dialogo__cuerpo">
+        <div class="admin__fotos">
+          <div class="admin-foto" data-foto="imagen">
+            <img alt="Foto del producto" hidden>
+            <span class="admin-foto__vacia">Sin foto</span>
+            <span class="admin-foto__acciones">
+              <label class="boton boton--chico boton--borde">Elegir foto<input type="file" accept="image/*" hidden></label>
+              <button type="button" class="admin-foto__quitar" hidden>Quitar</button>
+            </span>
+            <small>Foto del producto</small>
+          </div>
+          <div class="admin-foto" data-foto="ambiente">
+            <img alt="Foto del producto instalado" hidden>
+            <span class="admin-foto__vacia">Sin foto</span>
+            <span class="admin-foto__acciones">
+              <label class="boton boton--chico boton--borde">Elegir foto<input type="file" accept="image/*" hidden></label>
+              <button type="button" class="admin-foto__quitar" hidden>Quitar</button>
+            </span>
+            <small>Instalado (opcional)</small>
+          </div>
+        </div>
+
+        <label>Nombre
+          <input name="nombre" maxlength="120" autocomplete="off">
+        </label>
+        <div class="admin__fila2">
+          <label>Categoría
+            <select name="categoria_id"></select>
+            <button type="button" class="enlace-chico" data-abrir-categorias>+ Nueva categoría</button>
+          </label>
+          <label>Se vende por
+            <select name="unidad">
+              <option value="plancha">Plancha</option>
+              <option value="caja">Caja</option>
+              <option value="unidad">Unidad</option>
+            </select>
+          </label>
+        </div>
+        <div class="admin__fila2">
+          <label>Precio ($)
+            <input name="precio" inputmode="numeric" autocomplete="off" placeholder="Vacío = Consultar">
+          </label>
+          <label>Precio antes de la oferta ($)
+            <input name="precio_anterior" inputmode="numeric" autocomplete="off" placeholder="Opcional">
+          </label>
+        </div>
+        <div class="admin__fila2">
+          <label>m² por plancha o caja
+            <input name="m2" inputmode="decimal" autocomplete="off" placeholder="Ej: 1,9">
+          </label>
+          <label>Código de color
+            <input name="codigo_color" maxlength="40" autocomplete="off" placeholder="Ej: 8005">
+          </label>
+        </div>
+        <div class="admin__fila2">
+          <label>Stock actual
+            <input name="stock" inputmode="numeric" autocomplete="off" placeholder="Vacío = no controlar">
+          </label>
+          <label>Avisar cuando queden
+            <input name="stock_minimo" inputmode="numeric" autocomplete="off" placeholder="Ej: 3">
+          </label>
+        </div>
+        <div class="admin-compra" data-compra>
+          <label>Llegó mercadería
+            <input name="compra" inputmode="numeric" autocomplete="off" placeholder="Cantidad que llegó">
+          </label>
+          <button type="button" class="boton boton--chico boton--borde" data-sumar-compra>Sumar al stock</button>
+          <small>Si contaste y el stock no calza, cambia "Stock actual". Las compras y correcciones salen en el Excel del mes.</small>
+          <p class="admin__ok" data-ok-producto hidden></p>
+        </div>
+        <label>Detalles (uno por línea)
+          <textarea name="detalles" rows="4" placeholder="Plancha 1,22 x 2,44 m&#10;Espesor 3 mm&#10;Impermeable"></textarea>
+        </label>
+        <label class="admin__check"><input type="checkbox" name="activo"> Visible en la página</label>
+        <label class="admin__check"><input type="checkbox" name="oferta"> Marcar como oferta</label>
+        <p class="admin__error" data-error-producto hidden></p>
+      </div>
+      <footer class="admin-dialogo__pie">
+        <button type="button" class="boton boton--chico admin__peligro" data-eliminar-producto>Eliminar</button>
+        <button type="submit" class="boton">Guardar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Categorías del catálogo -->
+  <dialog class="admin-dialogo" data-dialogo-categorias aria-labelledby="titulo-categorias">
+    <form class="admin__form" data-form-categoria novalidate>
+      <header class="admin-dialogo__cabeza">
+        <h2 id="titulo-categorias">Categorías</h2>
+        <button type="button" class="admin-dialogo__cerrar" data-cerrar aria-label="Cerrar">×</button>
+      </header>
+      <div class="admin-dialogo__cuerpo">
+        <p class="admin__nota">Son los grupos del catálogo, por ejemplo Cerámica o Porcelanato. Aparecen como filtros en la página y como botones en la portada (cuando tienen productos). Para cambiar un nombre, escríbelo y sal del campo.</p>
+        <div class="admin__lista" data-lista-categorias></div>
+        <div class="categoria-nueva">
+          <label>Nueva categoría
+            <input name="nombre" maxlength="40" autocomplete="off" placeholder="Ej: Cerámica">
+          </label>
+          <label>Descripción
+            <input name="descripcion" maxlength="120" autocomplete="off" placeholder="Opcional. Ej: Para pisos y muros">
+          </label>
+          <button type="submit" class="boton boton--chico"><svg class="icono"><use href="#i-mas"></use></svg>Agregar</button>
+        </div>
+        <p class="admin__error" data-error-categoria hidden></p>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Registrar venta -->
+  <dialog class="admin-dialogo" data-dialogo-venta aria-labelledby="titulo-venta">
+    <form class="admin__form" data-form-venta novalidate>
+      <header class="admin-dialogo__cabeza">
+        <h2 id="titulo-venta">Registrar venta</h2>
+        <button type="button" class="admin-dialogo__cerrar" data-cerrar aria-label="Cerrar">×</button>
+      </header>
+      <div class="admin-dialogo__cuerpo">
+        <div class="admin__items" data-items></div>
+        <button type="button" class="boton boton--chico boton--borde admin__agregar" data-agregar-item><svg class="icono"><use href="#i-mas"></use></svg>Agregar otro producto</button>
+        <p class="admin__total-venta">Total <strong data-total-venta>$0</strong></p>
+        <div class="admin__fila2">
+          <label>Medio de pago
+            <select name="medio_pago"></select>
+          </label>
+          <label>Entrega
+            <select name="entrega">
+              <option value="retiro">Retiro en local</option>
+              <option value="despacho">Despacho</option>
+            </select>
+          </label>
+        </div>
+        <!-- Solo con efectivo: con cuánto paga el cliente y cuánto vuelto hay que darle -->
+        <div class="pago-efectivo" data-pago-efectivo hidden>
+          <label>¿Con cuánto paga?
+            <input name="paga_con" inputmode="numeric" placeholder="Opcional. Ej: 50.000" autocomplete="off">
+          </label>
+          <div class="pago-efectivo__rapidos" data-pagos-rapidos></div>
+          <p class="pago-efectivo__vuelto" data-vuelto hidden></p>
+        </div>
+        <!-- Solo con despacho: a quién y dónde se entrega -->
+        <fieldset class="entrega-datos" data-datos-entrega hidden>
+          <legend><svg class="icono" aria-hidden="true"><use href="#i-despacho"></use></svg>Datos de entrega</legend>
+          <div class="admin__fila2">
+            <label>Recibe
+              <input name="despacho_nombre" placeholder="Nombre de quien recibe" autocomplete="off">
+            </label>
+            <label>Teléfono
+              <input name="despacho_telefono" inputmode="tel" placeholder="9 1234 5678" autocomplete="off">
+            </label>
+          </div>
+          <div class="entrega-datos__direccion">
+            <label>Calle
+              <input name="despacho_direccion" placeholder="Ej: Los Aromos" autocomplete="off">
+            </label>
+            <label>Número
+              <input name="despacho_numero" placeholder="Ej: 1234" autocomplete="off">
+            </label>
+          </div>
+          <div class="admin__fila2">
+            <label>Depto / casa
+              <input name="despacho_depto" placeholder="Opcional. Ej: Depto 302" autocomplete="off">
+            </label>
+            <label>Comuna
+              <input name="despacho_comuna" list="comunas" placeholder="Ej: San Pedro de la Paz" autocomplete="off">
+            </label>
+          </div>
+          <label>Referencia
+            <input name="despacho_referencia" placeholder="Opcional. Ej: portón verde, frente a la plaza" autocomplete="off">
+          </label>
+          <label>Fecha de entrega
+            <input type="date" name="despacho_fecha">
+          </label>
+          <datalist id="comunas">
+            <option>San Pedro de la Paz</option><option>Concepción</option><option>Talcahuano</option><option>Hualpén</option>
+            <option>Chiguayante</option><option>Penco</option><option>Tomé</option><option>Coronel</option>
+            <option>Lota</option><option>Hualqui</option><option>Santa Juana</option>
+          </datalist>
+        </fieldset>
+        <label>Fecha
+          <input type="date" name="fecha">
+        </label>
+        <details class="admin__opcional">
+          <summary>Datos del cliente (opcional)</summary>
+          <div class="admin__opcional-campos">
+            <label>Nombre
+              <input name="cliente_nombre" autocomplete="off">
+            </label>
+            <div class="admin__fila2">
+              <label>Teléfono
+                <input name="cliente_telefono" inputmode="tel" autocomplete="off">
+              </label>
+              <label>Comuna
+                <input name="comuna" autocomplete="off">
+              </label>
+            </div>
+            <label>Notas
+              <textarea name="notas" rows="2" placeholder="Ej: con despacho, descuento, etc."></textarea>
+            </label>
+          </div>
+        </details>
+        <p class="admin__error" data-error-venta hidden></p>
+      </div>
+      <footer class="admin-dialogo__pie">
+        <button type="submit" class="boton boton--bloque">Guardar venta</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Contenido de la página: un formulario por tipo -->
+  <dialog class="admin-dialogo" data-dialogo-contenido="trabajos" aria-label="Trabajo realizado">
+    <form class="admin__form" novalidate>
+      <header class="admin-dialogo__cabeza">
+        <h2 data-titulo-contenido>Trabajo realizado</h2>
+        <button type="button" class="admin-dialogo__cerrar" data-cerrar aria-label="Cerrar">×</button>
+      </header>
+      <div class="admin-dialogo__cuerpo">
+        <div class="admin-foto" data-foto-trabajo>
+          <img alt="Foto del trabajo" hidden>
+          <span class="admin-foto__vacia">Sin foto</span>
+          <span class="admin-foto__acciones">
+            <label class="boton boton--chico boton--borde">Elegir foto<input type="file" accept="image/*" hidden></label>
+          </span>
+        </div>
+        <label>Título
+          <input name="titulo" maxlength="80" autocomplete="off" placeholder="Ej: Baño con PVC Calacatta Bronce">
+        </label>
+        <div class="admin__fila2">
+          <label>Comuna
+            <input name="comuna" maxlength="60" autocomplete="off" placeholder="Opcional">
+          </label>
+          <label>Producto usado
+            <select name="producto_id"></select>
+          </label>
+        </div>
+        <label class="admin__check"><input type="checkbox" name="visible"> Mostrar en la página</label>
+        <p class="admin__error" data-error-contenido hidden></p>
+      </div>
+      <footer class="admin-dialogo__pie">
+        <button type="button" class="boton boton--chico admin__peligro" data-eliminar-contenido>Eliminar</button>
+        <button type="submit" class="boton">Guardar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="admin-dialogo" data-dialogo-contenido="preguntas" aria-label="Pregunta frecuente">
+    <form class="admin__form" novalidate>
+      <header class="admin-dialogo__cabeza">
+        <h2 data-titulo-contenido>Pregunta frecuente</h2>
+        <button type="button" class="admin-dialogo__cerrar" data-cerrar aria-label="Cerrar">×</button>
+      </header>
+      <div class="admin-dialogo__cuerpo">
+        <label>Pregunta
+          <input name="pregunta" maxlength="200" autocomplete="off" placeholder="Ej: ¿Hacen despacho?">
+        </label>
+        <label>Respuesta
+          <textarea name="respuesta" rows="5" maxlength="1000"></textarea>
+        </label>
+        <label class="admin__check"><input type="checkbox" name="visible"> Mostrar en la página</label>
+        <p class="admin__error" data-error-contenido hidden></p>
+      </div>
+      <footer class="admin-dialogo__pie">
+        <button type="button" class="boton boton--chico admin__peligro" data-eliminar-contenido>Eliminar</button>
+        <button type="submit" class="boton">Guardar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <dialog class="admin-dialogo" data-dialogo-contenido="opiniones" aria-label="Opinión de cliente">
+    <form class="admin__form" novalidate>
+      <header class="admin-dialogo__cabeza">
+        <h2 data-titulo-contenido>Opinión de cliente</h2>
+        <button type="button" class="admin-dialogo__cerrar" data-cerrar aria-label="Cerrar">×</button>
+      </header>
+      <div class="admin-dialogo__cuerpo">
+        <div class="admin__fila2">
+          <label>Nombre del cliente
+            <input name="nombre" maxlength="60" autocomplete="off" placeholder="Ej: Ana P.">
+          </label>
+          <label>Comuna
+            <input name="comuna" maxlength="60" autocomplete="off" placeholder="Opcional">
+          </label>
+        </div>
+        <label>Lo que dijo
+          <textarea name="texto" rows="4" maxlength="600"></textarea>
+        </label>
+        <label>Estrellas
+          <select name="estrellas">
+            <option value="">Sin estrellas</option>
+            <option value="5">★★★★★ (5)</option>
+            <option value="4">★★★★ (4)</option>
+            <option value="3">★★★ (3)</option>
+            <option value="2">★★ (2)</option>
+            <option value="1">★ (1)</option>
+          </select>
+        </label>
+        <label class="admin__check"><input type="checkbox" name="visible"> Mostrar en la página</label>
+        <label class="admin__check"><input type="checkbox" name="permiso"> El cliente me dio permiso para publicarla</label>
+        <p class="admin__error" data-error-contenido hidden></p>
+      </div>
+      <footer class="admin-dialogo__pie">
+        <button type="button" class="boton boton--chico admin__peligro" data-eliminar-contenido>Eliminar</button>
+        <button type="submit" class="boton">Guardar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <!-- Confirmación (en vez del confirm() del navegador, que se ve mal en el celular) -->
+  <dialog class="admin-dialogo admin-dialogo--chico" data-dialogo-confirmar>
+    <form method="dialog">
+      <div class="admin-dialogo__cuerpo">
+        <p data-confirmar-texto></p>
+      </div>
+      <footer class="admin-dialogo__pie">
+        <button value="no" class="boton boton--chico boton--borde">Cancelar</button>
+        <button value="si" class="boton boton--chico admin__peligro" data-confirmar-si>Eliminar</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div class="admin__aviso" role="status" aria-live="polite" data-aviso hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+  <script src="../js/config.js?v=27"></script>
+  <!-- El panel está dividido por pestaña; admin.js va al final porque arranca todo -->
+  <script src="../js/admin-comun.js?v=27"></script>
+  <script src="../js/admin-productos.js?v=27"></script>
+  <script src="../js/admin-categorias.js?v=27"></script>
+  <script src="../js/admin-ventas.js?v=27"></script>
+  <script src="../js/admin-stock.js?v=27"></script>
+  <script src="../js/admin-cotizaciones.js?v=27"></script>
+  <script src="../js/admin-resumen.js?v=27"></script>
+  <script src="../js/admin-pagina.js?v=27"></script>
+  <script src="../js/admin.js?v=27"></script>
+</body>
+</html>
