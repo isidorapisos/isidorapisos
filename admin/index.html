@@ -7,11 +7,12 @@
   <!-- El panel nunca debe aparecer en Google -->
   <meta name="robots" content="noindex, nofollow">
   <title>Panel | Isidora</title>
+  <link rel="icon" href="../img/icono.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/estilos.css?v=28">
-  <link rel="stylesheet" href="../css/admin.css?v=28">
+  <link rel="stylesheet" href="../css/estilos.css?v=29">
+  <link rel="stylesheet" href="../css/admin.css?v=29">
 </head>
 <body class="admin">
   <!-- Íconos del panel: se usan con <svg class="icono"><use href="#i-nombre"></use></svg> -->
@@ -55,6 +56,44 @@
         </label>
         <p class="admin__error" data-error-login hidden></p>
         <button class="boton boton--bloque" type="submit">Entrar</button>
+        <button type="button" class="enlace-chico" style="align-self: center" data-ir-recuperar>¿Olvidaste tu clave?</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Pedir el correo para recuperar la clave -->
+  <main class="acceso" data-vista="recuperar" hidden>
+    <div class="acceso__tarjeta">
+      <span class="acceso__logo"><span class="logo__icono">I</span> Isidora</span>
+      <h1>Recuperar clave</h1>
+      <p>Escribe el correo del panel y te mandamos un enlace para crear una clave nueva.</p>
+      <form class="admin__form" data-form-recuperar>
+        <label>Correo
+          <input type="email" name="correo" autocomplete="username" required>
+        </label>
+        <p class="admin__error" data-error-recuperar hidden></p>
+        <p class="admin__ok" data-ok-recuperar hidden></p>
+        <button class="boton boton--bloque" type="submit">Enviar enlace</button>
+        <button type="button" class="enlace-chico" style="align-self: center" data-volver-login>Volver a entrar</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Crear la clave nueva (se abre con el enlace del correo) -->
+  <main class="acceso" data-vista="nueva-clave" hidden>
+    <div class="acceso__tarjeta">
+      <span class="acceso__logo"><span class="logo__icono">I</span> Isidora</span>
+      <h1>Crea tu clave nueva</h1>
+      <p>Mínimo 8 caracteres. Mejor si mezclas letras y números.</p>
+      <form class="admin__form" data-form-nueva-clave>
+        <label>Clave nueva
+          <input type="password" name="clave" autocomplete="new-password" minlength="8" required>
+        </label>
+        <label>Repite la clave
+          <input type="password" name="repetir" autocomplete="new-password" minlength="8" required>
+        </label>
+        <p class="admin__error" data-error-nueva-clave hidden></p>
+        <button class="boton boton--bloque" type="submit">Guardar y entrar</button>
       </form>
     </div>
   </main>
@@ -663,16 +702,16 @@
   <div class="admin__aviso" role="status" aria-live="polite" data-aviso hidden></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="../js/config.js?v=28"></script>
+  <script src="../js/config.js?v=29"></script>
   <!-- El panel está dividido por pestaña; admin.js va al final porque arranca todo -->
-  <script src="../js/admin-comun.js?v=28"></script>
-  <script src="../js/admin-productos.js?v=28"></script>
-  <script src="../js/admin-categorias.js?v=28"></script>
-  <script src="../js/admin-ventas.js?v=28"></script>
-  <script src="../js/admin-stock.js?v=28"></script>
-  <script src="../js/admin-cotizaciones.js?v=28"></script>
-  <script src="../js/admin-resumen.js?v=28"></script>
-  <script src="../js/admin-pagina.js?v=28"></script>
-  <script src="../js/admin.js?v=28"></script>
+  <script src="../js/admin-comun.js?v=29"></script>
+  <script src="../js/admin-productos.js?v=29"></script>
+  <script src="../js/admin-categorias.js?v=29"></script>
+  <script src="../js/admin-ventas.js?v=29"></script>
+  <script src="../js/admin-stock.js?v=29"></script>
+  <script src="../js/admin-cotizaciones.js?v=29"></script>
+  <script src="../js/admin-resumen.js?v=29"></script>
+  <script src="../js/admin-pagina.js?v=29"></script>
+  <script src="../js/admin.js?v=29"></script>
 </body>
 </html>
