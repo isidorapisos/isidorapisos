@@ -11,8 +11,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/estilos.css?v=29">
-  <link rel="stylesheet" href="../css/admin.css?v=29">
+  <link rel="stylesheet" href="../css/estilos.css?v=30">
+  <link rel="stylesheet" href="../css/admin.css?v=30">
 </head>
 <body class="admin">
   <!-- Íconos del panel: se usan con <svg class="icono"><use href="#i-nombre"></use></svg> -->
@@ -46,10 +46,10 @@
     <div class="acceso__tarjeta">
       <span class="acceso__logo"><span class="logo__icono">I</span> Isidora</span>
       <h1>Entrar al panel</h1>
-      <p>Usa el correo y la clave que te entregamos.</p>
+      <p>Escribe tu usuario y tu clave.</p>
       <form class="admin__form" data-form-login>
-        <label>Correo
-          <input type="email" name="correo" autocomplete="username" required>
+        <label>Usuario
+          <input type="text" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required>
         </label>
         <label>Clave
           <input type="password" name="clave" autocomplete="current-password" required>
@@ -66,10 +66,10 @@
     <div class="acceso__tarjeta">
       <span class="acceso__logo"><span class="logo__icono">I</span> Isidora</span>
       <h1>Recuperar clave</h1>
-      <p>Escribe el correo del panel y te mandamos un enlace para crear una clave nueva.</p>
+      <p>Escribe tu usuario y te mandamos al correo un enlace para crear una clave nueva.</p>
       <form class="admin__form" data-form-recuperar>
-        <label>Correo
-          <input type="email" name="correo" autocomplete="username" required>
+        <label>Usuario
+          <input type="text" name="usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required>
         </label>
         <p class="admin__error" data-error-recuperar hidden></p>
         <p class="admin__ok" data-ok-recuperar hidden></p>
@@ -702,16 +702,16 @@
   <div class="admin__aviso" role="status" aria-live="polite" data-aviso hidden></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-  <script src="../js/config.js?v=29"></script>
+  <script src="../js/config.js?v=30"></script>
   <!-- El panel está dividido por pestaña; admin.js va al final porque arranca todo -->
-  <script src="../js/admin-comun.js?v=29"></script>
-  <script src="../js/admin-productos.js?v=29"></script>
-  <script src="../js/admin-categorias.js?v=29"></script>
-  <script src="../js/admin-ventas.js?v=29"></script>
-  <script src="../js/admin-stock.js?v=29"></script>
-  <script src="../js/admin-cotizaciones.js?v=29"></script>
-  <script src="../js/admin-resumen.js?v=29"></script>
-  <script src="../js/admin-pagina.js?v=29"></script>
-  <script src="../js/admin.js?v=29"></script>
+  <script src="../js/admin-comun.js?v=30"></script>
+  <script src="../js/admin-productos.js?v=30"></script>
+  <script src="../js/admin-categorias.js?v=30"></script>
+  <script src="../js/admin-ventas.js?v=30"></script>
+  <script src="../js/admin-stock.js?v=30"></script>
+  <script src="../js/admin-cotizaciones.js?v=30"></script>
+  <script src="../js/admin-resumen.js?v=30"></script>
+  <script src="../js/admin-pagina.js?v=30"></script>
+  <script src="../js/admin.js?v=30"></script>
 </body>
 </html>
