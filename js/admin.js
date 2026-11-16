@@ -86,7 +86,7 @@ function prepararLogin() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     error.hidden = true;
-    const boton = form.querySelector("button");
+    const boton = form.querySelector('[type="submit"]');
     boton.disabled = true;
     boton.textContent = "Entrando…";
     const { data, error: fallo } = await db.auth.signInWithPassword({
@@ -113,9 +113,76 @@ function prepararLogin() {
   );
 }
 
+// "¿Olvidaste tu clave?": Supabase manda al correo un enlace que vuelve a esta misma página
+function prepararRecuperar() {
+  const formLogin = document.querySelector("[data-form-login]");
+  const form = document.querySelector("[data-form-recuperar]");
+  const error = document.querySelector("[data-error-recuperar]");
+  const ok = document.querySelector("[data-ok-recuperar]");
+  document.querySelector("[data-ir-recuperar]").addEventListener("click", () => {
+    form.correo.value = formLogin.correo.value.trim();
+    error.hidden = ok.hidden = true;
+    mostrarVista("recuperar");
+  });
+  document.querySelector("[data-volver-login]").addEventListener("click", () => mostrarVista("login"));
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    error.hidden = ok.hidden = true;
+    const boton = form.querySelector('[type="submit"]');
+    boton.disabled = true;
+    boton.textContent = "Enviando…";
+    const { error: fallo } = await db.auth.resetPasswordForEmail(form.correo.value.trim(), {
+      redirectTo: location.origin + location.pathname,
+    });
+    boton.disabled = false;
+    boton.textContent = "Enviar enlace";
+    if (fallo) {
+      error.textContent = fallo.status === 429
+        ? "Ya mandamos un correo hace poco. Espera unos minutos y prueba de nuevo."
+        : "No se pudo mandar el correo. Revisa que esté bien escrito y prueba de nuevo.";
+      error.hidden = false;
+      return;
+    }
+    ok.textContent = "Listo. Si es el correo del panel, te llegó un enlace (mira también en Spam). Ábrelo para crear tu clave nueva.";
+    ok.hidden = false;
+  });
+}
+
+// Pantalla que se abre con el enlace del correo
+function prepararNuevaClave() {
+  const form = document.querySelector("[data-form-nueva-clave]");
+  const error = document.querySelector("[data-error-nueva-clave]");
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    error.hidden = true;
+    if (form.clave.value !== form.repetir.value) {
+      error.textContent = "Las dos claves no son iguales.";
+      error.hidden = false;
+      return;
+    }
+    const boton = form.querySelector('[type="submit"]');
+    boton.disabled = true;
+    boton.textContent = "Guardando…";
+    const { data, error: fallo } = await db.auth.updateUser({ password: form.clave.value });
+    boton.disabled = false;
+    boton.textContent = "Guardar y entrar";
+    if (fallo) {
+      error.textContent = fallo.code === "same_password" ? "Esa es tu clave anterior. Elige una distinta."
+        : fallo.code === "weak_password" ? "Esa clave es muy fácil. Usa una más larga, con letras y números."
+        : "No se pudo guardar la clave. Pide un enlace nuevo y prueba otra vez.";
+      error.hidden = false;
+      return;
+    }
+    form.reset();
+    mostrarPanel(data.user);
+  });
+}
+
 async function iniciar() {
   usarMes(mesActual());
   prepararLogin();
+  prepararRecuperar();
+  prepararNuevaClave();
   prepararPestanas();
   prepararProductos();
   prepararCategorias();
@@ -125,8 +192,18 @@ async function iniciar() {
   prepararResumen();
   prepararPagina();
   const { data } = await db.auth.getSession();
-  if (data.session) mostrarPanel(data.session.user);
-  else mostrarVista("login");
+  if (ENLACE_CLAVE === "recuperar" && data.session) mostrarVista("nueva-clave");
+  else if (data.session) mostrarPanel(data.session.user);
+  else {
+    mostrarVista("login");
+    if (ENLACE_CLAVE) {
+      // Enlace vencido o ya usado: se avisa y se limpia la dirección
+      history.replaceState(null, "", location.pathname);
+      const error = document.querySelector("[data-error-login]");
+      error.textContent = "El enlace para cambiar la clave venció o ya se usó. Pide uno nuevo en «¿Olvidaste tu clave?».";
+      error.hidden = false;
+    }
+  }
 }
 
 iniciar();
