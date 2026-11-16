@@ -80,6 +80,13 @@ async function mostrarPanel(usuario) {
   abrirPestana("resumen");
 }
 
+// Usuarios cortos: se escribe el nombre en vez del correo (también sirve el correo completo)
+const USUARIOS = { rodrigo: "ventasisidorapisos@gmail.com" };
+function correoDeUsuario(texto) {
+  const limpio = texto.trim().toLowerCase();
+  return limpio.includes("@") ? limpio : USUARIOS[limpio] ?? limpio;
+}
+
 function prepararLogin() {
   const form = document.querySelector("[data-form-login]");
   const error = document.querySelector("[data-error-login]");
@@ -90,13 +97,13 @@ function prepararLogin() {
     boton.disabled = true;
     boton.textContent = "Entrando…";
     const { data, error: fallo } = await db.auth.signInWithPassword({
-      email: form.correo.value.trim(),
+      email: correoDeUsuario(form.usuario.value),
       password: form.clave.value,
     });
     boton.disabled = false;
     boton.textContent = "Entrar";
     if (fallo) {
-      error.textContent = "Correo o clave incorrectos.";
+      error.textContent = "Usuario o clave incorrectos.";
       error.hidden = false;
       return;
     }
@@ -120,7 +127,7 @@ function prepararRecuperar() {
   const error = document.querySelector("[data-error-recuperar]");
   const ok = document.querySelector("[data-ok-recuperar]");
   document.querySelector("[data-ir-recuperar]").addEventListener("click", () => {
-    form.correo.value = formLogin.correo.value.trim();
+    form.usuario.value = formLogin.usuario.value.trim();
     error.hidden = ok.hidden = true;
     mostrarVista("recuperar");
   });
@@ -128,10 +135,16 @@ function prepararRecuperar() {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     error.hidden = ok.hidden = true;
+    const correo = correoDeUsuario(form.usuario.value);
+    if (!correo.includes("@")) {
+      error.textContent = "No conozco ese usuario. Escribe el correo del panel.";
+      error.hidden = false;
+      return;
+    }
     const boton = form.querySelector('[type="submit"]');
     boton.disabled = true;
     boton.textContent = "Enviando…";
-    const { error: fallo } = await db.auth.resetPasswordForEmail(form.correo.value.trim(), {
+    const { error: fallo } = await db.auth.resetPasswordForEmail(correo, {
       redirectTo: location.origin + location.pathname,
     });
     boton.disabled = false;
@@ -143,7 +156,7 @@ function prepararRecuperar() {
       error.hidden = false;
       return;
     }
-    ok.textContent = "Listo. Si es el correo del panel, te llegó un enlace (mira también en Spam). Ábrelo para crear tu clave nueva.";
+    ok.textContent = "Listo. Te llegó un enlace al correo del panel (mira también en Spam). Ábrelo para crear tu clave nueva.";
     ok.hidden = false;
   });
 }
