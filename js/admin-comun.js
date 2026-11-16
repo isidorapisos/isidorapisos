@@ -1,6 +1,8 @@
 // Panel de administración: lo que usan todas las pestañas.
 // Orden de carga: admin-comun → admin-productos → admin-categorias → admin-ventas → admin-stock
 // → admin-cotizaciones → admin-resumen → admin-pagina → admin (login y arranque).
+// ¿Se llegó desde el correo de "¿Olvidaste tu clave?"? Se mira antes de que Supabase limpie la dirección.
+const ENLACE_CLAVE = location.hash.includes("type=recovery") ? "recuperar" : location.hash.includes("error_code=") ? "vencido" : null;
 const db = supabase.createClient(SUPABASE.url, SUPABASE.clave);
 const formatoPeso = new Intl.NumberFormat("es-CL", { style: "currency", currency: "CLP", maximumFractionDigits: 0 });
 const formatoNumero = new Intl.NumberFormat("es-CL");
