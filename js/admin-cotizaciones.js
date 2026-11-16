@@ -110,7 +110,16 @@ function prepararCotizaciones() {
   const lista = document.querySelector("[data-lista-cotizaciones]");
   lista.addEventListener("change", (e) => {
     const estado = e.target.closest("[data-estado-cotizacion]");
-    if (estado) cambiarEstado(Number(estado.dataset.estadoCotizacion), estado.value);
+    if (!estado) return;
+    const id = Number(estado.dataset.estadoCotizacion);
+    const cotizacion = cotizaciones.find((c) => c.id === id);
+    // "Compró" se marca al guardar la venta: así el monto queda en Ventas y en el Inicio
+    if (estado.value === "aceptada" && cotizacion) {
+      estado.value = cotizacion.estado;
+      abrirRegistroVenta(cotizacion);
+      return;
+    }
+    cambiarEstado(id, estado.value);
   });
   lista.addEventListener("click", (e) => {
     const venta = e.target.closest("[data-venta-desde]");
