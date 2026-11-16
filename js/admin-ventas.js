@@ -183,6 +183,7 @@ function abrirRegistroVenta(cotizacion = null) {
   form.querySelector("details").open = false;
   document.querySelector("[data-items]").innerHTML = "";
   cotizacionEnVenta = cotizacion;
+  document.querySelector("#titulo-venta").textContent = cotizacion?.referencia ? `Registrar venta · ${cotizacion.referencia}` : "Registrar venta";
   if (cotizacion) {
     cotizacion.items.forEach((item) => {
       agregarItem();
